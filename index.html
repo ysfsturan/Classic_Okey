@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klasik Türk Okeyi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Üst Menü -->
+    <header class="game-header">
+        <div class="brand-section">
+            <span class="brand-logo">🀄</span>
+            <div>
+                <h1 class="brand-title">Klasik Okey</h1>
+                <div class="brand-subtitle">Geleneksel Türk Okeyi</div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button id="btnNewGame" class="btn">
+                <span>🔄</span> Yeni Oyun
+            </button>
+            <button id="btnSound" class="btn" title="Sesi Aç/Kapat">
+                <span id="soundIcon">🔊</span>
+            </button>
+            <button id="btnRules" class="btn">
+                <span>📖</span> Kurallar
+            </button>
+        </div>
+    </header>
+
+    <!-- Okey Masası -->
+    <main class="okey-table-container">
+        <div class="felt-table">
+            <!-- Kuzey Oyuncusu (Üst) -->
+            <div class="seat-north">
+                <div id="badge-2" class="player-badge">
+                    <div class="player-avatar">👤</div>
+                    <div class="player-meta">
+                        <span class="player-name">Kuzey</span>
+                        <span class="player-score" id="score-2">Kalan: 20</span>
+                    </div>
+                </div>
+                <div class="mini-tiles-pile">
+                    <div class="mini-tile-back"></div>
+                    <div class="mini-tile-back"></div>
+                    <div class="mini-tile-back"></div>
+                    <div class="mini-tile-back"></div>
+                    <div class="mini-tile-back"></div>
+                </div>
+            </div>
+
+            <!-- Batı Oyuncusu (Sol) -->
+            <div class="seat-west">
+                <div id="badge-3" class="player-badge">
+                    <div class="player-avatar">👤</div>
+                    <div class="player-meta">
+                        <span class="player-name">Batı</span>
+                        <span class="player-score" id="score-3">Kalan: 20</span>
+                    </div>
+                </div>
+                <!-- Batı'nın Atık Bölmesi (Sizin solunuzdaki oyuncunun attığı taş buradan çekilir!) -->
+                <div id="discard-3" class="discard-box" title="Batı'nın Attığı Taş"></div>
+            </div>
+
+            <!-- Masa Ortası (Deste, Gösterge ve Atık Taşlar) -->
+            <div class="table-center">
+                <!-- Kuzey'in Atığı -->
+                <div id="discard-2" class="discard-box" style="position: absolute; top: 10px;" title="Kuzey'in Attığı Taş"></div>
+
+                <!-- Ortadaki Deste -->
+                <div id="drawDeck" class="draw-zone" title="Ortadan Taş Çek">
+                    <div class="deck-stack">
+                        <div class="deck-tile-layer layer-1"></div>
+                        <div class="deck-tile-layer layer-2"></div>
+                        <div class="deck-tile-layer layer-3">
+                            <span class="deck-crest">🀄</span>
+                        </div>
+                    </div>
+                    <span id="deckCount" class="deck-count">48 Taş</span>
+                    <span class="zone-label">DESTE</span>
+                </div>
+
+                <!-- Gösterge Taşı -->
+                <div class="indicator-zone">
+                    <div id="indicatorSlot"></div>
+                    <span class="zone-label">GÖSTERGE</span>
+                </div>
+
+                <!-- Sizin Atık Taşınız (Doğu'nun solundaki) -->
+                <div id="discard-0" class="discard-box" style="position: absolute; bottom: 10px;" title="Attığınız Taş"></div>
+            </div>
+
+            <!-- Doğu Oyuncusu (Sağ) -->
+            <div class="seat-east">
+                <div id="badge-1" class="player-badge">
+                    <div class="player-avatar">👤</div>
+                    <div class="player-meta">
+                        <span class="player-name">Doğu</span>
+                        <span class="player-score" id="score-1">Kalan: 20</span>
+                    </div>
+                </div>
+                <!-- Doğu'nun Atık Bölmesi -->
+                <div id="discard-1" class="discard-box" title="Doğu'nun Attığı Taş"></div>
+            </div>
+
+            <!-- Istaka (Sizin Taşlarınız) -->
+            <div class="istaka-container">
+                <div class="istaka-board">
+                    <!-- Üst Sıra (14 yuva) -->
+                    <div class="istaka-row" id="istakaRowTop"></div>
+                    <!-- Alt Sıra (14 yuva) -->
+                    <div class="istaka-row" id="istakaRowBottom"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alt Yardımcı Araç Çubuğu -->
+        <div class="table-footer">
+            <div id="statusMessage" class="status-box">
+                Sıra sizde: Ortadan veya solunuzdan taş çekin.
+            </div>
+
+            <div class="helper-actions">
+                <button id="btnSortRuns" class="btn" title="Renklerine göre ardışık diz">
+                    <span>📐</span> Seri Diz
+                </button>
+                <button id="btnSortSets" class="btn" title="Aynı sayıları farklı renklerle diz">
+                    <span>🎨</span> Düz Diz
+                </button>
+                <button id="btnSortPairs" class="btn" title="Çiftleri yan yana diz">
+                    <span>👥</span> Çift Diz
+                </button>
+                <button id="btnFinish" class="btn btn-finish" title="14 taşınız per ise eli bitirin">
+                    <span>🏆</span> BİTİR
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Kurallar Modalı -->
+    <div id="modalRules" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-title">
+                <span>📖 Okey Nasıl Oynanır?</span>
+                <button class="modal-close" data-close-modal>&times;</button>
+            </div>
+            <div style="font-size: 13px; line-height: 1.6; max-height: 70vh; overflow-y: auto;">
+                <h4 style="color: #ffd700; margin-bottom: 4px;">🎯 Oyunun Amacı</h4>
+                <p>Istakanızdaki 14 taşı geçerli perlere (seri veya düz gruplara) ayırıp, 15. boşta kalan taşı ortaya atarak eli bitirmektir.</p>
+
+                <h4 style="color: #ffd700; margin: 10px 0 4px 0;">🀄 Okey ve Gösterge</h4>
+                <p>Ortada açık duran taş <strong>Gösterge</strong>dir. Göstergenin aynı renginin <strong>1 fazlası</strong> o elin <strong>OKEY</strong>'idir. (Örn: Mavi 7 gösterge ise Mavi 8 Okey'dir. 13 ise 1 Okey olur.)</p>
+                <p>Okey taşı herhangi bir taşın yerine joker olarak kullanılabilir. <strong>Sahte Okey</strong> ise gerçek Okey'in asıl görevini üstlenir.</p>
+
+                <h4 style="color: #ffd700; margin: 10px 0 4px 0;">📐 Geçerli Perler</h4>
+                <ul style="margin-left: 18px;">
+                    <li><strong>Seri Per:</strong> Aynı renkten en az 3 ardışık sayı (Örn: Mavi 4-5-6 veya Kırmızı 11-12-13-1).</li>
+                    <li><strong>Düz Per:</strong> Aynı sayıdan en az 3 farklı renk (Örn: Sarı 9 - Mavi 9 - Kırmızı 9).</li>
+                    <li><strong>7 Çift:</strong> Istakadaki tüm taşları aynı renk ve aynı sayıdan 7 çift yapmak.</li>
+                </ul>
+
+                <h4 style="color: #ffd700; margin: 10px 0 4px 0;">🎮 Nasıl Oynanır?</h4>
+                <p>Sıranız geldiğinde ortadaki desteden veya solunuzdaki oyuncunun attığı taştan birini çekersiniz. Ardından ıstakanızdan işinize yaramayan bir taşı sağınızdaki bölmeye atarak sırayı geçirirsiniz.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zafer Modalı -->
+    <div id="modalWin" class="modal-overlay">
+        <div class="modal-content" style="text-align: center; padding: 30px;">
+            <div style="font-size: 48px; margin-bottom: 10px;">🏆</div>
+            <h2 id="winPlayerName" style="color: #ffd700; margin-bottom: 8px;">Tebrikler, Kazandınız!</h2>
+            <p id="winDescription" style="color: #e0d5c1; margin-bottom: 20px;">Eli başarıyla bitirdiniz.</p>
+            <button id="btnNextRound" class="btn btn-finish" style="padding: 10px 24px; font-size: 15px;">
+                Yeni El Başlat
+            </button>
+        </div>
+    </div>
+
+    <!-- JS Dosyaları -->
+    <script src="js/audio.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

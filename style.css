@@ -1,0 +1,597 @@
+/* ========================================================
+   KLASİK TÜRK OKEYİ - ÖZEL ÇUHA & AHŞAP ISTAKA STİLLERİ
+   ======================================================== */
+
+:root {
+    --table-felt: #0d4a2b;
+    --table-felt-radial: radial-gradient(circle at 50% 45%, #15633b 0%, #0d4a2b 60%, #072e1a 100%);
+    --wood-dark: #2b180d;
+    --wood-mid: #4a2b18;
+    --wood-light: #7a4829;
+    --istaka-wood: linear-gradient(180deg, #d29d66 0%, #a46f3a 50%, #7e5227 100%);
+    --istaka-tier-shadow: inset 0 3px 6px rgba(0,0,0,0.6), 0 2px 4px rgba(255,255,255,0.15);
+    --gold: #d4af37;
+    --gold-bright: #ffd700;
+    --gold-glow: rgba(255, 215, 0, 0.4);
+    
+    /* Taş Renkleri */
+    --tile-bg: radial-gradient(circle at 35% 35%, #ffffff 0%, #f7f1e5 60%, #e8dcce 100%);
+    --tile-shadow: 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 1px #fff, inset 0 -1px 2px rgba(0,0,0,0.15);
+    --tile-color-yellow: #f0a500;
+    --tile-color-blue: #1976d2;
+    --tile-color-black: #212121;
+    --tile-color-red: #d32f2f;
+    
+    --font-main: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: #080c09;
+    background-image: radial-gradient(circle at 50% 50%, #16241b 0%, #080c09 80%);
+    color: #f5f5f5;
+    font-family: var(--font-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* ================= HEADER ================= */
+.game-header {
+    background: linear-gradient(180deg, rgba(30, 20, 12, 0.95) 0%, rgba(15, 9, 5, 0.95) 100%);
+    border-bottom: 2px solid #5a3822;
+    padding: 8px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    font-size: 26px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.brand-title {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #ffd700 0%, #dfa338 50%, #fff1b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-subtitle {
+    font-size: 11px;
+    color: #a8917e;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn {
+    background: linear-gradient(180deg, #4d301f 0%, #2d1b11 100%);
+    color: #f3e5ab;
+    border: 1px solid #73482d;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.btn:hover:not(:disabled) {
+    background: linear-gradient(180deg, #633e28 0%, #3d2518 100%);
+    border-color: var(--gold);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 8px var(--gold-glow);
+}
+
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    filter: grayscale(0.6);
+}
+
+.btn-finish {
+    background: linear-gradient(180deg, #b8860b 0%, #8b6508 100%);
+    border-color: #ffd700;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 7px 18px;
+    animation: finishPulse 2s infinite ease-in-out;
+}
+
+@keyframes finishPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+/* ================= TABLE LAYOUT ================= */
+.okey-table-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.felt-table {
+    width: 100%;
+    aspect-ratio: 16 / 9.5;
+    background: var(--table-felt-radial);
+    border: 12px solid #2e170a;
+    border-radius: 16px;
+    box-shadow: 
+        0 15px 35px rgba(0,0,0,0.8),
+        inset 0 0 50px rgba(0,0,0,0.7),
+        inset 0 0 0 2px #633618;
+    position: relative;
+    display: grid;
+    grid-template-rows: 85px 1fr 140px;
+    grid-template-columns: 130px 1fr 130px;
+    overflow: hidden;
+}
+
+/* ================= OPPONENT SEATS ================= */
+/* Kuzey (Top) */
+.seat-north {
+    grid-area: 1 / 2 / 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding-top: 6px;
+}
+
+/* Batı (Left) */
+.seat-west {
+    grid-area: 2 / 1 / 3 / 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding-left: 6px;
+}
+
+/* Doğu (Right) */
+.seat-east {
+    grid-area: 2 / 3 / 3 / 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding-right: 6px;
+}
+
+/* Opponent Player Card */
+.player-badge {
+    background: rgba(15, 25, 18, 0.85);
+    border: 1px solid #3c614b;
+    border-radius: 8px;
+    padding: 5px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+.player-badge.active-turn {
+    border-color: var(--gold-bright);
+    box-shadow: 0 0 14px var(--gold-bright);
+    background: rgba(30, 45, 30, 0.95);
+}
+
+.player-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #1b3826;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    border: 1px solid #4a755b;
+}
+
+.player-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.player-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.player-score {
+    font-size: 11px;
+    color: var(--gold-bright);
+}
+
+/* Mini opponent rack (Ters taşlar) */
+.mini-tiles-pile {
+    display: flex;
+    gap: 2px;
+}
+
+.mini-tile-back {
+    width: 10px;
+    height: 16px;
+    background: #e2d7c5;
+    border: 1px solid #baa993;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* ================= CENTER TABLE (DRAW & DISCARD PILES) ================= */
+.table-center {
+    grid-area: 2 / 2 / 3 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    padding: 10px;
+}
+
+.draw-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.draw-zone:hover:not(.disabled) {
+    transform: scale(1.05);
+}
+
+.draw-zone.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.deck-stack {
+    position: relative;
+    width: 52px;
+    height: 68px;
+}
+
+/* 3D look for tile stack */
+.deck-tile-layer {
+    position: absolute;
+    width: 50px;
+    height: 66px;
+    background: var(--tile-bg);
+    border: 1px solid #c9bcae;
+    border-radius: 6px;
+    box-shadow: var(--tile-shadow);
+}
+
+.layer-1 { top: 6px; left: 2px; }
+.layer-2 { top: 3px; left: 1px; }
+.layer-3 { top: 0px; left: 0px; display: flex; align-items: center; justify-content: center; }
+
+.deck-crest {
+    font-size: 18px;
+    color: #8c7664;
+    opacity: 0.5;
+}
+
+.deck-count {
+    font-size: 11px;
+    font-weight: 700;
+    color: #ffd700;
+    background: rgba(0,0,0,0.7);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Gösterge Taşı Alanı */
+.indicator-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.zone-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a8cfb4;
+}
+
+/* Oyuncuların Atık Taş Yuvaları (Discards) */
+.discard-box {
+    width: 56px;
+    height: 74px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: rgba(0,0,0,0.15);
+    transition: all 0.2s ease;
+}
+
+.discard-box.can-draw {
+    border-color: var(--gold-bright);
+    box-shadow: 0 0 12px var(--gold-glow);
+    cursor: pointer;
+    background: rgba(255, 215, 0, 0.1);
+    animation: drawGlow 1.2s infinite alternate;
+}
+
+@keyframes drawGlow {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+}
+
+/* ================= OKEY TILES (MELAMİN TAŞLAR) ================= */
+.okey-tile {
+    width: 48px;
+    height: 64px;
+    background: var(--tile-bg);
+    border: 1px solid #ded3c5;
+    border-radius: 6px;
+    box-shadow: var(--tile-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0 6px 0;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.okey-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+
+.okey-tile.selected {
+    transform: translateY(-10px) scale(1.08);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.6), 0 0 12px var(--gold-bright);
+    border-color: var(--gold-bright);
+    z-index: 20;
+}
+
+.tile-number {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+    font-family: 'Arial Black', Impact, sans-serif;
+}
+
+.tile-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-bottom: 2px;
+}
+
+/* Tile Colors */
+.tile-yellow .tile-number { color: var(--tile-color-yellow); text-shadow: 0 1px 0 #946600; }
+.tile-yellow .tile-dot { background: var(--tile-color-yellow); }
+
+.tile-blue .tile-number { color: var(--tile-color-blue); text-shadow: 0 1px 0 #0d47a1; }
+.tile-blue .tile-dot { background: var(--tile-color-blue); }
+
+.tile-black .tile-number { color: var(--tile-color-black); text-shadow: 0 1px 0 #000; }
+.tile-black .tile-dot { background: var(--tile-color-black); }
+
+.tile-red .tile-number { color: var(--tile-color-red); text-shadow: 0 1px 0 #b71c1c; }
+.tile-red .tile-dot { background: var(--tile-color-red); }
+
+/* Sahte Okey */
+.okey-tile.tile-fake .tile-number {
+    font-size: 22px;
+    color: var(--gold);
+}
+.tile-fake-crest {
+    font-size: 16px;
+    color: var(--gold);
+    line-height: 1;
+}
+
+/* Gerçek Okey Rozeti */
+.okey-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 18px;
+    height: 18px;
+    background: radial-gradient(circle, #ffd700 0%, #b8860b 100%);
+    color: #3e2205;
+    font-size: 10px;
+    font-weight: 900;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+    border: 1px solid #fff;
+}
+
+/* ================= ISTAKA (PLAYER'S RACK) ================= */
+.istaka-container {
+    grid-area: 3 / 1 / 4 / 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 4px;
+}
+
+.istaka-board {
+    width: 96%;
+    max-width: 900px;
+    background: var(--istaka-wood);
+    border: 3px solid #573315;
+    border-radius: 8px;
+    padding: 6px 12px;
+    box-shadow: 
+        0 8px 20px rgba(0,0,0,0.7),
+        inset 0 1px 1px rgba(255,255,255,0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.istaka-row {
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    gap: 4px;
+    height: 68px;
+    background: rgba(0,0,0,0.25);
+    border-radius: 6px;
+    box-shadow: var(--istaka-tier-shadow);
+    padding: 2px;
+}
+
+.istaka-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 4px;
+    transition: background 0.15s ease;
+}
+
+.istaka-slot:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.istaka-slot.drag-over {
+    background: rgba(255, 215, 0, 0.2);
+    box-shadow: inset 0 0 6px var(--gold);
+}
+
+/* ================= BOTTOM HELPER TOOLBAR ================= */
+.table-footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: rgba(20, 12, 7, 0.9);
+    border-top: 1px solid #4a2d18;
+    border-radius: 0 0 10px 10px;
+}
+
+.status-box {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffd700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.helper-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ================= MODALS ================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: linear-gradient(180deg, #2b1c11 0%, #150d08 100%);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 520px;
+    width: 90%;
+    color: #f0e6d6;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.9), 0 0 20px var(--gold-glow);
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold-bright);
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #4d301b;
+    padding-bottom: 8px;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: #a8917e;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Responsive tweaks */
+@media (max-width: 820px) {
+    .okey-tile {
+        width: 32px;
+        height: 46px;
+    }
+    .tile-number {
+        font-size: 18px;
+    }
+    .istaka-row {
+        height: 50px;
+    }
+}
