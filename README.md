@@ -6,28 +6,30 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Web Audio API](https://img.shields.io/badge/Audio-Web_Audio_API-success)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
 
-A beautifully crafted, authentic, web-based **Classic Turkish Okey** game featuring a realistic green felt table, 28-slot wooden Istaka rack, 3 intelligent AI opponents, smart auto-sort helpers, and synthesized tactile sound effects.
+A beautifully crafted, authentic, web-based **Classic Turkish Okey & 101 Yüzbir Okey** game featuring a realistic green felt table, 28-slot wooden Istaka rack, 3 intelligent AI opponents, smart auto-sort helpers, 101 hand-opening mechanics, and synthesized tactile sound effects.
 
 ---
 
 ## 🌟 Key Features / Öne Çıkan Özellikler
 
+- **🀄 Two Game Modes in One (İki Oyun Modu Bir Arada):**
+  - **Klasik Düz Okey:** 14-tile meld completion & 15th tile finish.
+  - **101 (Yüzbir) Okey:** 21/22-tile hands, live 101 meld point calculator, table hand-opening (runs & pairs), and penalty point tracking.
+
+- **⚡ Akıllı Sıralayıcılar (Perleri Aralarında Boşlukla Düzenleme):**
+  - **Seri Diz:** Ardışık serileri bulur ve aralarında **1 yuva boşluk** bırakarak dizer.
+  - **Düz Diz:** Aynı sayıdaki farklı renkleri gruplar ve aralarında boşluk bırakarak yerleştirir.
+  - **Çift Diz:** Eşleşen çiftleri yan yana ve çiftler arasında boşlukla ıstakaya yerleştirir.
+
 - **🎨 Authentic Green Felt & Wooden Istaka Aesthetic:**
   - Classic green felt tabletop with mahogany wooden borders.
   - Realistic 2-tier wooden Istaka (rack) with 28 flexible tile slots.
   - 3D engraved melamine tiles in 4 vibrant colors (Yellow, Blue, Black, Red) + Fake Okeys (Sahte Okey).
-  - Clear Okey crown badges and revealed Gösterge indicator.
+  - Clear Okey crown badges, revealed Gösterge, and 101 opened melds table area.
 
 - **🤖 3 Smart AI Opponents (Doğu, Kuzey, Batı):**
-  - Heuristic-based decision engine evaluating discards and runs.
-  - Bots strategically draw from discards or the draw pile and discard dead tiles.
-  - Natural turn delays to follow the flow of the game seamlessly.
-
-- **⚡ Istaka Helper Tools (Tek Tıkla Dizme):**
-  - **Seri Diz:** Automatically groups runs by color and ascending numbers.
-  - **Düz Diz:** Groups sets by matching numbers with distinct colors.
-  - **Çift Diz:** Groups identical pairs together.
-  - Click-and-swap or double-click to discard.
+  - AI capable of playing both Classic Okey and 101 Okey.
+  - Strategically draws, evaluates 101 hand-opening thresholds, and discards dead tiles.
 
 - **🔊 Pure Web Audio API Sound Synthesizer:**
   - Offline procedural sound effects for tile draws, clacks, Istaka sliding, and victory chimes.

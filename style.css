@@ -1,5 +1,5 @@
 /* ========================================================
-   KLASİK TÜRK OKEYİ - ÖZEL ÇUHA & AHŞAP ISTAKA STİLLERİ
+   KLASİK OKEY & 101 YÜZBİR - ÖZEL ÇUHA & AHŞAP ISTAKA STİLLERİ
    ======================================================== */
 
 :root {
@@ -82,6 +82,37 @@ body {
     color: #a8917e;
 }
 
+/* Mode Switcher Segmented Control */
+.mode-switcher-container {
+    display: flex;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid #5a3822;
+    border-radius: 20px;
+    padding: 3px;
+    gap: 4px;
+}
+
+.mode-btn {
+    background: transparent;
+    border: none;
+    color: #cbbba8;
+    padding: 5px 14px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.25s ease;
+}
+
+.mode-btn.active {
+    background: linear-gradient(180deg, #b8860b 0%, #7d5b08 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(184, 134, 11, 0.5);
+}
+
 .header-actions {
     display: flex;
     align-items: center;
@@ -118,19 +149,31 @@ body {
     filter: grayscale(0.6);
 }
 
+.btn-open-101 {
+    background: linear-gradient(180deg, #2e7d32 0%, #1b5e20 100%);
+    border-color: #81c784;
+    color: #fff;
+    font-weight: 700;
+}
+
+.btn-open-101:hover:not(:disabled) {
+    background: linear-gradient(180deg, #388e3c 0%, #2e7d32 100%);
+    box-shadow: 0 0 12px rgba(76, 175, 80, 0.6);
+}
+
 .btn-finish {
     background: linear-gradient(180deg, #b8860b 0%, #8b6508 100%);
     border-color: #ffd700;
     color: #fff;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
-    padding: 7px 18px;
+    padding: 7px 16px;
     animation: finishPulse 2s infinite ease-in-out;
 }
 
 @keyframes finishPulse {
     0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    70% { box-shadow: 0 0 0 8px rgba(255, 215, 0, 0); }
     100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
 }
 
@@ -141,7 +184,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 8px 12px;
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
@@ -149,7 +192,7 @@ body {
 
 .felt-table {
     width: 100%;
-    aspect-ratio: 16 / 9.5;
+    aspect-ratio: 16 / 9.6;
     background: var(--table-felt-radial);
     border: 12px solid #2e170a;
     border-radius: 16px;
@@ -159,50 +202,46 @@ body {
         inset 0 0 0 2px #633618;
     position: relative;
     display: grid;
-    grid-template-rows: 85px 1fr 140px;
-    grid-template-columns: 130px 1fr 130px;
+    grid-template-rows: 75px 1fr 144px;
+    grid-template-columns: 120px 1fr 120px;
     overflow: hidden;
 }
 
 /* ================= OPPONENT SEATS ================= */
-/* Kuzey (Top) */
 .seat-north {
     grid-area: 1 / 2 / 2 / 3;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    padding-top: 6px;
+    padding-top: 4px;
 }
 
-/* Batı (Left) */
 .seat-west {
     grid-area: 2 / 1 / 3 / 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding-left: 6px;
+    gap: 8px;
+    padding-left: 4px;
 }
 
-/* Doğu (Right) */
 .seat-east {
     grid-area: 2 / 3 / 3 / 4;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding-right: 6px;
+    gap: 8px;
+    padding-right: 4px;
 }
 
-/* Opponent Player Card */
 .player-badge {
     background: rgba(15, 25, 18, 0.85);
     border: 1px solid #3c614b;
     border-radius: 8px;
-    padding: 5px 12px;
+    padding: 4px 10px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -217,14 +256,14 @@ body {
 }
 
 .player-avatar {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: #1b3826;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 15px;
     border: 1px solid #4a755b;
 }
 
@@ -234,7 +273,7 @@ body {
 }
 
 .player-name {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: #fff;
 }
@@ -244,36 +283,54 @@ body {
     color: var(--gold-bright);
 }
 
-/* Mini opponent rack (Ters taşlar) */
 .mini-tiles-pile {
     display: flex;
     gap: 2px;
 }
 
 .mini-tile-back {
-    width: 10px;
-    height: 16px;
+    width: 9px;
+    height: 15px;
     background: #e2d7c5;
     border: 1px solid #baa993;
     border-radius: 2px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
-/* ================= CENTER TABLE (DRAW & DISCARD PILES) ================= */
+/* ================= CENTER TABLE ================= */
 .table-center {
     grid-area: 2 / 2 / 3 / 3;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     position: relative;
-    padding: 10px;
+    padding: 6px;
+    gap: 8px;
+}
+
+.top-discard {
+    position: absolute;
+    top: 4px;
+}
+
+.bottom-discard {
+    position: absolute;
+    bottom: 4px;
+}
+
+.deck-indicator-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
 }
 
 .draw-zone {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
@@ -289,15 +346,14 @@ body {
 
 .deck-stack {
     position: relative;
-    width: 52px;
-    height: 68px;
+    width: 48px;
+    height: 64px;
 }
 
-/* 3D look for tile stack */
 .deck-tile-layer {
     position: absolute;
-    width: 50px;
-    height: 66px;
+    width: 46px;
+    height: 62px;
     background: var(--tile-bg);
     border: 1px solid #c9bcae;
     border-radius: 6px;
@@ -319,30 +375,28 @@ body {
     font-weight: 700;
     color: #ffd700;
     background: rgba(0,0,0,0.7);
-    padding: 2px 6px;
+    padding: 1px 6px;
     border-radius: 4px;
 }
 
-/* Gösterge Taşı Alanı */
 .indicator-zone {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
 }
 
 .zone-label {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: #a8cfb4;
 }
 
-/* Oyuncuların Atık Taş Yuvaları (Discards) */
 .discard-box {
-    width: 56px;
-    height: 74px;
+    width: 52px;
+    height: 68px;
     border: 1px dashed rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     display: flex;
@@ -364,6 +418,53 @@ body {
 @keyframes drawGlow {
     from { transform: scale(1); }
     to { transform: scale(1.06); }
+}
+
+/* ================= 101 MASAYA AÇILAN PERLER HAVUZU ================= */
+.opened-melds-container {
+    width: 95%;
+    max-height: 90px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px dashed rgba(255, 215, 0, 0.4);
+    border-radius: 8px;
+    padding: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    overflow-y: auto;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.empty-melds-label {
+    font-size: 11px;
+    color: #92bfa0;
+    font-style: italic;
+}
+
+.table-meld-group {
+    display: flex;
+    gap: 1px;
+    background: rgba(0,0,0,0.4);
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.table-opened-tile {
+    width: 26px !important;
+    height: 36px !important;
+    padding: 1px 0 !important;
+}
+
+.table-opened-tile .tile-number {
+    font-size: 14px !important;
+}
+
+.table-opened-tile .tile-dot {
+    width: 5px !important;
+    height: 5px !important;
 }
 
 /* ================= OKEY TILES (MELAMİN TAŞLAR) ================= */
@@ -410,7 +511,6 @@ body {
     margin-bottom: 2px;
 }
 
-/* Tile Colors */
 .tile-yellow .tile-number { color: var(--tile-color-yellow); text-shadow: 0 1px 0 #946600; }
 .tile-yellow .tile-dot { background: var(--tile-color-yellow); }
 
@@ -423,7 +523,6 @@ body {
 .tile-red .tile-number { color: var(--tile-color-red); text-shadow: 0 1px 0 #b71c1c; }
 .tile-red .tile-dot { background: var(--tile-color-red); }
 
-/* Sahte Okey */
 .okey-tile.tile-fake .tile-number {
     font-size: 22px;
     color: var(--gold);
@@ -434,7 +533,6 @@ body {
     line-height: 1;
 }
 
-/* Gerçek Okey Rozeti */
 .okey-badge {
     position: absolute;
     top: -6px;
@@ -464,8 +562,8 @@ body {
 }
 
 .istaka-board {
-    width: 96%;
-    max-width: 900px;
+    width: 98%;
+    max-width: 920px;
     background: var(--istaka-wood);
     border: 3px solid #573315;
     border-radius: 8px;
@@ -502,11 +600,6 @@ body {
     background: rgba(255, 255, 255, 0.05);
 }
 
-.istaka-slot.drag-over {
-    background: rgba(255, 215, 0, 0.2);
-    box-shadow: inset 0 0 6px var(--gold);
-}
-
 /* ================= BOTTOM HELPER TOOLBAR ================= */
 .table-footer {
     width: 100%;
@@ -519,6 +612,12 @@ body {
     border-radius: 0 0 10px 10px;
 }
 
+.status-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .status-box {
     font-size: 13px;
     font-weight: 600;
@@ -526,6 +625,30 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+/* 101 Canlı Takip Rozeti */
+.tracker-101 {
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid #73482d;
+    padding: 3px 10px;
+    border-radius: 12px;
+    color: #e0d0c0;
+}
+
+.tracker-101.ready {
+    border-color: #81c784;
+    color: #a5d6a7;
+    background: rgba(46, 125, 50, 0.3);
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
+
+.tracker-101.opened {
+    border-color: #ffd700;
+    color: #ffd700;
+    background: rgba(255, 215, 0, 0.15);
 }
 
 .helper-actions {
@@ -582,7 +705,6 @@ body {
     cursor: pointer;
 }
 
-/* Responsive tweaks */
 @media (max-width: 820px) {
     .okey-tile {
         width: 32px;

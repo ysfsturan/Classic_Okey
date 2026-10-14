@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klasik Türk Okeyi</title>
+    <title>Klasik Okey & 101 Yüzbir Okey</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,9 +13,19 @@
         <div class="brand-section">
             <span class="brand-logo">🀄</span>
             <div>
-                <h1 class="brand-title">Klasik Okey</h1>
-                <div class="brand-subtitle">Geleneksel Türk Okeyi</div>
+                <h1 class="brand-title">Okey Âlâ</h1>
+                <div class="brand-subtitle">Klasik Okey & 101 Yüzbir</div>
             </div>
+        </div>
+
+        <!-- Mod Değiştirici (Klasik vs 101) -->
+        <div class="mode-switcher-container">
+            <button id="btnModeClassic" class="mode-btn active">
+                <span>🀄</span> Klasik Okey
+            </button>
+            <button id="btnMode101" class="mode-btn">
+                <span>💯</span> 101 Okey
+            </button>
         </div>
 
         <div class="header-actions">
@@ -61,36 +71,44 @@
                         <span class="player-score" id="score-3">Kalan: 20</span>
                     </div>
                 </div>
-                <!-- Batı'nın Atık Bölmesi (Sizin solunuzdaki oyuncunun attığı taş buradan çekilir!) -->
-                <div id="discard-3" class="discard-box" title="Batı'nın Attığı Taş"></div>
+                <!-- Batı'nın Atık Bölmesi -->
+                <div id="discard-3" class="discard-box" title="Batı'nın Attığı Taş (Çekebilirsiniz)"></div>
             </div>
 
-            <!-- Masa Ortası (Deste, Gösterge ve Atık Taşlar) -->
+            <!-- Masa Ortası (Deste, Gösterge, Atıklar ve 101 Masaya Açılan Perler) -->
             <div class="table-center">
                 <!-- Kuzey'in Atığı -->
-                <div id="discard-2" class="discard-box" style="position: absolute; top: 10px;" title="Kuzey'in Attığı Taş"></div>
+                <div id="discard-2" class="discard-box top-discard" title="Kuzey'in Attığı Taş"></div>
 
-                <!-- Ortadaki Deste -->
-                <div id="drawDeck" class="draw-zone" title="Ortadan Taş Çek">
-                    <div class="deck-stack">
-                        <div class="deck-tile-layer layer-1"></div>
-                        <div class="deck-tile-layer layer-2"></div>
-                        <div class="deck-tile-layer layer-3">
-                            <span class="deck-crest">🀄</span>
+                <!-- 101 Açılan Perler Alanı (Ortadaki yeşil havuz) -->
+                <div id="openedMeldsContainer" class="opened-melds-container" style="display: none;">
+                    <span class="empty-melds-label">Masaya henüz el açılmadı. (101 puan veya 5 çift)</span>
+                </div>
+
+                <!-- Deste ve Gösterge Bölmesi -->
+                <div class="deck-indicator-group">
+                    <!-- Ortadaki Deste -->
+                    <div id="drawDeck" class="draw-zone" title="Ortadan Taş Çek">
+                        <div class="deck-stack">
+                            <div class="deck-tile-layer layer-1"></div>
+                            <div class="deck-tile-layer layer-2"></div>
+                            <div class="deck-tile-layer layer-3">
+                                <span class="deck-crest">🀄</span>
+                            </div>
                         </div>
+                        <span id="deckCount" class="deck-count">48 Taş</span>
+                        <span class="zone-label">DESTE</span>
                     </div>
-                    <span id="deckCount" class="deck-count">48 Taş</span>
-                    <span class="zone-label">DESTE</span>
+
+                    <!-- Gösterge Taşı -->
+                    <div class="indicator-zone">
+                        <div id="indicatorSlot"></div>
+                        <span class="zone-label">GÖSTERGE</span>
+                    </div>
                 </div>
 
-                <!-- Gösterge Taşı -->
-                <div class="indicator-zone">
-                    <div id="indicatorSlot"></div>
-                    <span class="zone-label">GÖSTERGE</span>
-                </div>
-
-                <!-- Sizin Atık Taşınız (Doğu'nun solundaki) -->
-                <div id="discard-0" class="discard-box" style="position: absolute; bottom: 10px;" title="Attığınız Taş"></div>
+                <!-- Sizin Atık Taşınız -->
+                <div id="discard-0" class="discard-box bottom-discard" title="Attığınız Taş"></div>
             </div>
 
             <!-- Doğu Oyuncusu (Sağ) -->
@@ -119,21 +137,32 @@
 
         <!-- Alt Yardımcı Araç Çubuğu -->
         <div class="table-footer">
-            <div id="statusMessage" class="status-box">
-                Sıra sizde: Ortadan veya solunuzdan taş çekin.
+            <div class="status-left">
+                <div id="statusMessage" class="status-box">
+                    Sıra sizde: Ortadan veya solunuzdan taş çekin.
+                </div>
+                <!-- 101 Canlı Puan Göstergesi -->
+                <div id="tracker101" class="tracker-101" style="display: none;">
+                    Per Toplamı: <strong>0</strong> / 101
+                </div>
             </div>
 
             <div class="helper-actions">
-                <button id="btnSortRuns" class="btn" title="Renklerine göre ardışık diz">
+                <button id="btnSortRuns" class="btn" title="Perleri aralarında boşluk bırakarak seri dizer">
                     <span>📐</span> Seri Diz
                 </button>
-                <button id="btnSortSets" class="btn" title="Aynı sayıları farklı renklerle diz">
+                <button id="btnSortSets" class="btn" title="Aynı sayıları farklı renklerle aralarında boşlukla dizer">
                     <span>🎨</span> Düz Diz
                 </button>
-                <button id="btnSortPairs" class="btn" title="Çiftleri yan yana diz">
+                <button id="btnSortPairs" class="btn" title="Çiftleri yan yana ve aralarında boşlukla dizer">
                     <span>👥</span> Çift Diz
                 </button>
-                <button id="btnFinish" class="btn btn-finish" title="14 taşınız per ise eli bitirin">
+                <!-- 101 El Açma Düğmesi -->
+                <button id="btnOpen101" class="btn btn-open-101" style="display: none;" title="101 puan veya 5 çift ile masaya el aç">
+                    <span>📖</span> El Aç (101)
+                </button>
+                <!-- Eli Bitirme Düğmesi -->
+                <button id="btnFinish" class="btn btn-finish" title="Geçerli perleriniz tamamlandıysa eli bitirin">
                     <span>🏆</span> BİTİR
                 </button>
             </div>
@@ -144,26 +173,23 @@
     <div id="modalRules" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-title">
-                <span>📖 Okey Nasıl Oynanır?</span>
+                <span>📖 Okey ve 101 Nasıl Oynanır?</span>
                 <button class="modal-close" data-close-modal>&times;</button>
             </div>
             <div style="font-size: 13px; line-height: 1.6; max-height: 70vh; overflow-y: auto;">
-                <h4 style="color: #ffd700; margin-bottom: 4px;">🎯 Oyunun Amacı</h4>
-                <p>Istakanızdaki 14 taşı geçerli perlere (seri veya düz gruplara) ayırıp, 15. boşta kalan taşı ortaya atarak eli bitirmektir.</p>
-
-                <h4 style="color: #ffd700; margin: 10px 0 4px 0;">🀄 Okey ve Gösterge</h4>
-                <p>Ortada açık duran taş <strong>Gösterge</strong>dir. Göstergenin aynı renginin <strong>1 fazlası</strong> o elin <strong>OKEY</strong>'idir. (Örn: Mavi 7 gösterge ise Mavi 8 Okey'dir. 13 ise 1 Okey olur.)</p>
-                <p>Okey taşı herhangi bir taşın yerine joker olarak kullanılabilir. <strong>Sahte Okey</strong> ise gerçek Okey'in asıl görevini üstlenir.</p>
-
-                <h4 style="color: #ffd700; margin: 10px 0 4px 0;">📐 Geçerli Perler</h4>
+                <h4 style="color: #ffd700; margin-bottom: 4px;">🀄 Klasik Düz Okey</h4>
+                <p>14 taşınızı geçerli perlere (seri veya düz gruplara) ayırıp, 15. boşta kalan taşı atarak eli bitirmektir.</p>
+                
+                <h4 style="color: #ffd700; margin: 12px 0 4px 0;">💯 101 (Yüzbir) Okey Farkları</h4>
                 <ul style="margin-left: 18px;">
-                    <li><strong>Seri Per:</strong> Aynı renkten en az 3 ardışık sayı (Örn: Mavi 4-5-6 veya Kırmızı 11-12-13-1).</li>
-                    <li><strong>Düz Per:</strong> Aynı sayıdan en az 3 farklı renk (Örn: Sarı 9 - Mavi 9 - Kırmızı 9).</li>
-                    <li><strong>7 Çift:</strong> Istakadaki tüm taşları aynı renk ve aynı sayıdan 7 çift yapmak.</li>
+                    <li>Oyunculara <strong>21'er taş</strong> (başlayana <strong>22 taş</strong>) dağıtılır.</li>
+                    <li>Masaya el açabilmek için elinizdeki perlerin sayı değerleri toplamı <strong>en az 101 puan</strong> olmalıdır veya <strong>en az 5 çift</strong> bulunmalıdır.</li>
+                    <li>Elinizi açtıktan sonra masada açık duran tüm perlere elinizdeki uygun taşları işleyebilirsiniz.</li>
+                    <li>Istakanızdaki tüm taşları açıp elinizde sadece 1 taş kaldığında o taşı atarak oyunu bitirirsiniz.</li>
                 </ul>
 
-                <h4 style="color: #ffd700; margin: 10px 0 4px 0;">🎮 Nasıl Oynanır?</h4>
-                <p>Sıranız geldiğinde ortadaki desteden veya solunuzdaki oyuncunun attığı taştan birini çekersiniz. Ardından ıstakanızdan işinize yaramayan bir taşı sağınızdaki bölmeye atarak sırayı geçirirsiniz.</p>
+                <h4 style="color: #ffd700; margin: 12px 0 4px 0;">⚡ Akıllı Sıralayıcılar</h4>
+                <p><strong>Seri Diz</strong>, <strong>Düz Diz</strong> ve <strong>Çift Diz</strong> düğmeleri taşlarınızı otomatik olarak gruplar ve aralarında <strong>1 yuva boşluk</strong> bırakarak ıstakanızda net şekilde görmenizi sağlar.</p>
             </div>
         </div>
     </div>
@@ -173,7 +199,7 @@
         <div class="modal-content" style="text-align: center; padding: 30px;">
             <div style="font-size: 48px; margin-bottom: 10px;">🏆</div>
             <h2 id="winPlayerName" style="color: #ffd700; margin-bottom: 8px;">Tebrikler, Kazandınız!</h2>
-            <p id="winDescription" style="color: #e0d5c1; margin-bottom: 20px;">Eli başarıyla bitirdiniz.</p>
+            <p id="winDescription" style="color: #e0d5c1; margin-bottom: 20px;">Eli başarıyla tamamladınız.</p>
             <button id="btnNextRound" class="btn btn-finish" style="padding: 10px 24px; font-size: 15px;">
                 Yeni El Başlat
             </button>
